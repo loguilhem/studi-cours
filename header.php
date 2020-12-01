@@ -1,6 +1,15 @@
 <?php
 session_start ();
 
+require_once ('singleton/Flash.php');
+require_once ('injection/FlashBagInterface.php');
+require_once ('injection/FlashBag.php');
+require_once ('injection/User.php');
+require_once ('factory/Transport.php');
+require_once ('factory/Moto.php');
+require_once ('factory/Car.php');
+require_once ('factory/TransportFactory.php');
+
 ?>
 
 <!doctype html>
