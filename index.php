@@ -1,42 +1,15 @@
 <?php
-ini_set('display_errors', 1);
 
-include_once 'header.php';
+// créer une page web html hors php
+// mettre le php dans le html
+// afficher le html depuis php
+// concaténer du texte
+// montrer une boucle, une opération mathématiques
+// les variables se lisent dans les doubles quotes
+// rappel html : faire un lien
+// insérer du css, notamment bootstrap
 
 
-?>
-
-    <h1>Les design patterns</h1>
-
-    <?php
-        /* Singleton
-        $flash = Flash::getInstance();
-        $flash->printFlash();
-        /* */
-
-        /* Dependency Injection
-        $flash = new FlashBag();
-        $message = $flash->printFlash();
-        if ($message != null) {
-            echo '<span class="alert alert-'.$message[0].'">'.$message[1].'</span>';
-        }
-
-        /* */
-
-        /* Factory
-            $travel = TransportFactory::chooseTransportMode(3);
-            echo $travel->travel();
-            echo '<br>';
-            echo $travel->getBrand();
-        /* */
-
-    ?>
-
-<!--    <a href="action-success.php" class="btn btn-outline-primary">Ajouter un succès</a>-->
-<!--    <a href="action-danger.php" class="btn btn-outline-danger">Ajouter une alerte</a>-->
-
-<!--    <a href="add-user.php" class="btn btn-outline-dark">Ajouter un utilisateur</a>-->
-
-<?php
-    include_once "footer.php";
-?>
+$userAge = 30;
+$userName = 'John';
+echo 'Je suis $userName et je suis né il y a $userAge ans !';
