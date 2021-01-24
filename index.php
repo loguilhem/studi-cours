@@ -26,8 +26,8 @@ $nbChildren = 6;
 $nbDiscSold = 200000000;
 $unitPriceDisc = '12.60';
 
-var_dump($unitPriceDisc);
-var_dump((int)$unitPriceDisc);
+//var_dump($unitPriceDisc);
+//var_dump((int)$unitPriceDisc);
 
 $fortune = $nbDiscSold/$unitPriceDisc;
 
@@ -80,10 +80,10 @@ $fortune = $nbDiscSold/$unitPriceDisc;
 //                        }
 
                         // Pour montrer l'importance du typage
-                        function foo(float $price) {
+                        function printPrice(float $price) {
                             echo 'prix du disc : '. $price.' €';
                         }
-                        echo foo((float)$unitPriceDisc);
+                        echo printPrice($unitPriceDisc);
 
                     ?>
                 </div>
