@@ -1,20 +1,35 @@
 <?php
-    $firstName = 'Robert';
-    $lastName = 'Marley';
+declare(strict_types = 1);
+error_reporting(E_ALL);
+ini_set('display_errors', 'on');
+/* ici si on met 1 à la place 'on', ca pète en strict type car la fonction attend un string */
 
-    $fruits = [
-            'Pommes', 'Poires', 'Bananes', 'Mangues', 'Ananas', 'Litchis'
-    ];
+// 1 - Créer des variables et les afficher
+// 2 - Modifier la valeur et l'afficher
+// 3 - Créer des constantes et les afficher
+// 4 - Tenter de modifier la valeur de la constante
+// 5 - Les différents type de variable : int, float, string, array, bool
+// 6 - créer un int et l'afficher
+// 7 - créer un float et l'afficher
+// 8 - multiplier float par int
+// 9 - remplacer le float en string et montrer que ca marche car PHP n'est pas fortement typé
+// 10 - mettre declare(strict_types = 1); en haut du fichier
+// 11 - erreur si 1 à la place de 'on' dans init_st, créer la fonction echo price (float-string)
+// 12 - caster le string price en float puis int et montrer avec des var_dump
+// 13 - créer un boolean et l'utiliser dans une condition
+// 13 - montrer les incrémentations
 
-    $maths = 15;
-    $anglais = 10;
-    $informatique = 20;
-    $biologie = 10;
+$lastName = 'Anderson';
+const FIRSTNAME = 'Rita';
 
-    var_dump($maths);
+$nbChildren = 6;
+$nbDiscSold = 200000000;
+$unitPriceDisc = '12.60';
 
-    $moyenne = ($maths + $anglais + $informatique + $biologie)/4;
+var_dump($unitPriceDisc);
+var_dump((int)$unitPriceDisc);
 
+$fortune = $nbDiscSold/$unitPriceDisc;
 
 ?>
 
@@ -27,25 +42,54 @@
     <body>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-6">
-                    <h1>Coucou tout le monde</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut nulla mi, tincidunt sit amet au</p>
+                <div class="col-12">
+                    <h1>Les variables et les constantes</h1>
+                    <p>Avant de d'épouser Bob, le nom de jeune fille de <?php echo FIRSTNAME; ?> était : <?php echo $lastName; ?></p>
+                    <?php $lastName = 'Marley'; ?>
+                    <p>Puis elle pris le nom de <?php echo $lastName; ?></p>
                 </div>
-            <div class="col-6">
-                <h2>Ma colonne de droite</h2>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <?php
+                        echo 'ensemble, ils on eu '.$nbChildren.' enfants';
+                        echo '<br>';
+                        echo 'Bob a vendu '.$nbDiscSold.' albums';
+                        echo '<br>';
+                        echo 'Il a donc amassé '.$fortune.' $';
+                    echo '<br>';
+                    echo '<br>';
+                    echo '<br>';
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut nulla mi, tincidunt sit amet au</p>
-                    <section>
-                        <article>
-                            <?php
-                                echo "<h3>Voici vote moyenne</h3>";
-                                echo (($maths + $anglais + $informatique + $biologie)/4).'/20';
-                            ?>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut nulla mi, tincidunt sit amet auctor ac, maximus eget lacus. Aenean et urna urna. Etiam fermentum eu augue sed pharetra. Nulla facilisi. Cras vel sem id ipsum cursus placerat. Ut dolor dui, blandit sed ultrices quis, volutpat non dui. Etiam ultrices efficitur risus, a congue eros tempor at. Curabitur quis tincidunt nisi. Etiam justo nisl, cursus at finibus ut, tincidunt volutpat libero. In mattis libero lorem, sed efficitur erat elementum nec. Nulla ultrices mattis tincidunt. Curabitur feugiat scelerisque sapien, a luctus lectus luctus in. Sed quam enim, consectetur ut finibus a, sollicitudin posuere orci. Fusce varius nulla vel porttitor commodo. Ut nisi sapien, fermentum vel magna sit amet, placerat efficitur risus.
-                            </p>
-                        </article>
-                    </section>
+                        $rich = true;
+                        var_dump($rich);
+                        if (!$rich) {
+                            echo 'Bob était riche ';
+                        } else {
+                            echo 'Bob était pauvre';
+                        }
+
+                        $ourFortune = 1;
+//                        for ($i = 0; $i < 50; $i++) {
+//                            echo $i.' ';
+//                            //$ourFortune += 1; //$ourFortune++;
+////                            $ourFortune = $ourFortune*2;
+//                            $ourFortune += $ourFortune;
+//                            echo $ourFortune;
+//                            echo '<br>';
+//                        }
+
+                        // Pour montrer l'importance du typage
+                        function foo(float $price) {
+                            echo 'prix du disc : '. $price.' €';
+                        }
+                        echo foo((float)$unitPriceDisc);
+
+                    ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
 
                 </div>
             </div>
