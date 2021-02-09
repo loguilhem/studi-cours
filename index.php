@@ -3,145 +3,107 @@ error_reporting(E_ALL);
 ini_set('display_errors', 'on');
 
 /**
- * 1 - Créer un tableau avec array et []
- * 2 - Montrer que l'on peut y mettre ce qu'on veut
- * 3 - Montrer comment parcourir un tableau
- * 4 - Montrer que les clés sont autogénérees
- * 5 - Montrer comment générés des clés, cf les artistes
- * 6 - Montrer comment modifier une valeur grâce à sa clé
- * 7 - Montrer comment ajouter une valeur via la clé ou via array push
- * 8 - Montrer array merge, cf les fruits
- * 9 - Montrer in_array
- * 10 - Montrer array-column cf les artistes
- * 11 - Montrer implode avec firstnames
- * 12 - Montrer explode avec une liste de sport
- * 13 - Montrer array unique, asort sur sports
- * 14 - Montrer le système de référence : @see https://blog.penjee.com/wp-content/uploads/2015/02/pass-by-reference-vs-pass-by-value-animation.gif
- *
+ * 1 - Rappel sur les booleans
+ * 2 - Montrer un condition simple
+ * 3 - Montrer que l'on test la "véracité" de la condition if(bool true == true) <=> if(bool true)
+ * 4 - Montrer que l'on test la "véracité" de la condition if(!bool true == true) <=> if(false)
+ * 5 - les différents opérateurs (<;>;<=;>=;==;<>
+ * 6 - Montrer le === et le !=
+ * 7 - Montrer le if, else, else if
+ * 8 - Montrer le witch
+ * 9 - Les && et || dans un if
  */
 
-$myArray = [];
-$myArrayJr = array();
+// 1, 2, 3, 4
+$victory = false;
+$supporterMood = null;
 
-$nawak = [
-    'string',
-    1,
-    1.05,
-    true,
-    [
-        100,
-        'string2',
-        'coucou'
-    ]
-];
+// 5
+//$myMoney = 10000;
+//$cart = 1000;
 
-$nawak[0] = 'ma super cool string';
+// 6
+$myMoney = '1000';
+$cart = 1000;
 
-$artists = [
-    [
-        'firstName' => 'Bob',
-        'lastName' => 'Marley',
-        'style' => 'Reggae'
-    ],
-    [
-        'firstName' => 'Freddy',
-        'lastName' => 'Mercury',
-        'style' => 'Rock'
-    ],
-    [
-        'firstName' => 'Robert',
-        'lastName' => 'Clegg',
-        'style' => 'Pop Zulu'
-    ],
-];
+// 7 et 8
+$animal = 'cds';
 
-$firstnames = array_column($artists, 'firstName');
-$firstnamesString = implode('-', $firstnames);
-
-$artists[2]['firstName'] = 'Johnny';
-
-$cindy = ['firstName' =>  'Cindy', 'lastName' => 'Lauper', 'style' => 'Pop'];
-//$artists[3] = $cindy;
-array_push($artists, $cindy);
-
-$fruits = ['Banana', 'Tomato', 'Pineapple'];
-$vegetables = ['Avocado', 'Lettuce', 'Onion'];
-
-if (!in_array('Pepper', $vegetables)) {
-    array_push($vegetables, 'Pepper');
-}
-
-$sports = 'football-rugby-basketball-handball-waterpolo-football';
-$sportArray = explode('-',$sports);
-asort($sportArray, SORT_REGULAR);
+// 9
+$age = 18;
+$licence = false;
 
 ?>
 
 <html lang="fr">
-    <head>
-        <title>Ma première page web</title>
-        <meta charset="UTF-8">
-        <link href="bootstrap.min.css" rel="stylesheet">
-    </head>
-    <body>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <h1>Les tableaux</h1>
-                    <table class="table table-bordered table-striped">
-                        <?php
-                        foreach ($nawak as $key => $item) {
-                            if (is_array($item)) {
-                                foreach ($item as $k => $i) {
-                                    echo '<tr><td>'.$k.'</td><td>'.$i.'</td></tr>';
-                                }
-                            } else {
-                                echo '<tr><td>'.$key.'</td><td>'.$item.'</td></tr>';
-
-                            }
-                        }
-                        ?>
-                    </table>
-                    <h2>Les artistes</h2>
-                    <table class="table table-bordered table-striped">
-                        <?php
-                        foreach ($artists as $artist) {
-                            echo '<tr>';
-                            foreach ($artist as $key => $value) {
-                                echo '<td>'.$key.'</td><td>'.$value.'</td>';
-                            }
-                            echo '</tr>';
-                        }
-                        ?>
-                    </table>
-                    <p>
-                        Les prénoms des artistes sont : <?php echo $firstnamesString; ?>
-                    </p>
-                    <h2>Les courses</h2>
-                    <table class="table table-bordered table-striped">
-                        <?php
-                            foreach (array_merge($fruits, $vegetables) as $item) {
-                                echo $item.'<br>';
-                            }
-                        ?>
-                    </table>
-                    <h3>Les sports</h3>
-                    <p>
-                        <?php
-                            foreach ($sportArray as $key => $sport) {
-                                $sportArray[$key] = 'toto';
-
-                                echo $sport;
-                                echo '<br>';
-                            }
-                        foreach ($sportArray as $key => $sport) {
-                            echo $sport;
-                            echo '<br>';
-                        }
-                        ?>
-                    </p>
-                </div>
-            </div>
+<head>
+    <title>Ma première page web</title>
+    <meta charset="UTF-8">
+    <link href="bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h1>Les conditions</h1>
+            <h2>Résultat du match</h2>
+            <?php
+                if (false) {
+                    $supporterMood = 'Happy';
+                }
+                if (true) {
+                    $supporterMood = 'Sad';
+                }
+            ?>
+            <div class="alert alert-success">Supporters are <?php echo $supporterMood; ?></div>
+            <hr>
+            <h2>Est-ce que je peux acheter les produits dans mon panier ?</h2>
+            <?php
+                if ($myMoney === $cart) {
+                    echo '<div class="alert alert-success">Oui !</div>';
+                } else {
+                    echo '<div class="alert alert-danger">Non !</div>';
+                }
+            ?>
+            <hr>
+<!--            <h2>Que fait le --><?php //echo $animal; ?><!-- ?</h2>-->
+<!--            --><?php
+//            if ($animal == 'chat') {
+//                echo '<div class="alert alert-success">Miaou</div>';
+//            } elseif ($animal === 'chien') {
+//                echo '<div class="alert alert-success">Ouaf</div>';
+//            } elseif ($animal == 'vache') {
+//                echo '<div class="alert alert-success">Meuh</div>';
+//            } else {
+//                echo '<div class="alert alert-warning">Inconnu</div>';
+//            }
+//            ?>
+            <h2>Que fait le <?php echo $animal; ?> ?</h2>
+            <?php
+            switch ($animal) {
+                case 'chat':
+                    echo '<div class="alert alert-success">Miaou</div>';
+                    break;
+                case 'chien':
+                    echo '<div class="alert alert-success">Ouaf</div>';
+                    break;
+                case 'vache':
+                    echo '<div class="alert alert-success">Meuh</div>';
+                    break;
+                default:
+                    echo '<div class="alert alert-warning">Inconnu</div>';
+            }
+            ?>
+            <h2>Louer une voiture ?</h2>
+            <?php
+                if ($myMoney > 100 || ($age >= 18 && $licence)) {
+                    echo 'oui';
+                } else {
+                    echo 'non';
+                }
+            ?>
         </div>
-    </body>
+    </div>
+</div>
+</body>
 </html>
