@@ -1,43 +1,52 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 'on');
-
-/**
- * 1 - Rappel sur les booleans
- * 2 - Montrer un condition simple
- * 3 - Montrer que l'on test la "véracité" de la condition if(bool true == true) <=> if(bool true)
- * 4 - Montrer que l'on test la "véracité" de la condition if(!bool true == true) <=> if(false)
- * 5 - les différents opérateurs (<;>;<=;>=;==;<>
- * 6 - Montrer le === et le !=
- * 7 - Montrer le if, else, else if
- * 8 - Montrer le witch
- * 9 - Les && et || dans un if
+// 4 types de boucles :
+/*
+ * while
+ * foreach
+ * for
+ * do while
  */
+// 0 - une boucle for
+// 1 - la boucle for avec les parts de tarte avec la condition pour le pluriel
 
-// 1, 2, 3, 4
-$victory = false;
-$supporterMood = null;
+$nbSlice = 12;
 
-// 5
-//$myMoney = 10000;
-//$cart = 1000;
+// 2 - la boucle while avec le réservoir de la voiture
+$gasTank = 60;
+$gasTankLevel = 0;
 
-// 6
-$myMoney = '1000';
-$cart = 1000;
+// 3 - la boucle do while avec la dépense d'argent vs while
+$money = 100;
+$productPrice = 12;
 
-// 7 et 8
-$animal = 'cds';
+// 4 - La boucle foreach avec le tableau des artistes
+$bob = [
+    'name' => 'Marley',
+    'style' => 'reggae',
+    'alive' => false,
+];
 
-// 9
-$age = 18;
-$licence = false;
+$david = [
+    'name' => 'Bowie',
+    'style' => 'pop',
+    'alive' => false,
+];
+
+$elton = [
+    'name' => 'John',
+    'style' => 'pop',
+    'alive' => true,
+];
+
+$artists = [$bob, $david, $elton];
 
 ?>
 
 <html lang="fr">
 <head>
-    <title>Ma première page web</title>
+    <title>Les boucles</title>
     <meta charset="UTF-8">
     <link href="bootstrap.min.css" rel="stylesheet">
 </head>
@@ -45,63 +54,61 @@ $licence = false;
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
-            <h1>Les conditions</h1>
-            <h2>Résultat du match</h2>
+            <h1>Les boucles</h1>
             <?php
-                if (false) {
-                    $supporterMood = 'Happy';
-                }
-                if (true) {
-                    $supporterMood = 'Sad';
-                }
-            ?>
-            <div class="alert alert-success">Supporters are <?php echo $supporterMood; ?></div>
-            <hr>
-            <h2>Est-ce que je peux acheter les produits dans mon panier ?</h2>
-            <?php
-                if ($myMoney === $cart) {
-                    echo '<div class="alert alert-success">Oui !</div>';
-                } else {
-                    echo '<div class="alert alert-danger">Non !</div>';
-                }
-            ?>
-            <hr>
-<!--            <h2>Que fait le --><?php //echo $animal; ?><!-- ?</h2>-->
-<!--            --><?php
-//            if ($animal == 'chat') {
-//                echo '<div class="alert alert-success">Miaou</div>';
-//            } elseif ($animal === 'chien') {
-//                echo '<div class="alert alert-success">Ouaf</div>';
-//            } elseif ($animal == 'vache') {
-//                echo '<div class="alert alert-success">Meuh</div>';
-//            } else {
-//                echo '<div class="alert alert-warning">Inconnu</div>';
-//            }
-//            ?>
-            <h2>Que fait le <?php echo $animal; ?> ?</h2>
-            <?php
-            switch ($animal) {
-                case 'chat':
-                    echo '<div class="alert alert-success">Miaou</div>';
-                    break;
-                case 'chien':
-                    echo '<div class="alert alert-success">Ouaf</div>';
-                    break;
-                case 'vache':
-                    echo '<div class="alert alert-success">Meuh</div>';
-                    break;
-                default:
-                    echo '<div class="alert alert-warning">Inconnu</div>';
+            for ($i = 0; $i <= 10; $i++) {
+                echo 'Mon compteur est à '.$i.'<br>';
             }
             ?>
-            <h2>Louer une voiture ?</h2>
             <?php
-                if ($myMoney > 100 || ($age >= 18 && $licence)) {
-                    echo 'oui';
-                } else {
-                    echo 'non';
+                for ($slice = 1; $slice <= $nbSlice; $slice++) {
+                    if ($slice === 1) {
+                        echo 'Je mange une part ! J\'ai mangé '.$slice.' part de tarte<br>';
+                    } else {
+                        echo 'Je mange une part ! J\'ai mangé '.$slice.' parts de tarte<br>';
+                    }
                 }
             ?>
+
+            <?php
+                while ($gasTankLevel < $gasTank) {
+                    $gasTankLevel++;
+                    $toFill = $gasTank-$gasTankLevel;
+                    echo 'J\'ajoute un 1L dans mon réservoir, il me reste '. $toFill .'L à remplir<br>';
+                }
+                echo "Mon réservoir est plein !";
+            ?>
+
+            <?php
+            while ($money > 0) {
+                echo 'J\'achète un produit, il me rester '. $money .'€ dans mon porte-monnaie<br>';
+                $money -= $productPrice;
+            }
+            do {
+                echo 'J\'achète un produit, il me rester '. $money .'€ dans mon porte-monnaie<br>';
+                $money -= $productPrice;
+            }
+            while ($money > 0)
+            ?>
+
+            <?php
+                foreach ($artists as $artist) {
+                    echo $artist['name'] . ' peut-il faire un concert de '.$artist['style']. ' ? ';
+                    echo $artist['alive'] ? 'OUI' : 'NON';
+                    echo '<br>';
+                }
+
+                echo '<table class="table table-responsive">';
+                foreach ($artists as $artist) {
+                    foreach ($artist as $key => $value) {
+                        if ($value) {
+                            echo '<tr><td>'.$key.'</td><td>'.$value.'</td></tr>';
+                        }
+                    }
+                }
+                echo '</table>';
+            ?>
+
         </div>
     </div>
 </div>
