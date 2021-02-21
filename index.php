@@ -1,52 +1,86 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 'on');
-// 4 types de boucles :
-/*
- * while
- * foreach
- * for
- * do while
- */
-// 0 - une boucle for
-// 1 - la boucle for avec les parts de tarte avec la condition pour le pluriel
+// 0 - créer le tableau des joueurs
+// 1 - utiliser la fonction rand directement sur chaque jouer et montrer les résultats au chargement de page
+// 2 - faire une fonction qu'on appelle où on veut afficher les résultats
+// 3 - faire une autre fonction pour voir le plus haut score avec un max sur le tableau directement, appeler generateDices dedans
+// 4 - mettre de la logique dans la fonction whoIsTheWinner pour récupérer
+// 5 - montrer une fonction qui retourne rien vs une qui retourne avec l'exemple du prénom nom
+// 6 - fonction récursive avec doNothingUntilWins
+// 7 - anonyme avec le 'M.'
+// 8 - exemple de callback
+// 9 - exemple de référence en php avec &
 
-$nbSlice = 12;
-
-// 2 - la boucle while avec le réservoir de la voiture
-$gasTank = 60;
-$gasTankLevel = 0;
-
-// 3 - la boucle do while avec la dépense d'argent vs while
-$money = 100;
-$productPrice = 12;
-
-// 4 - La boucle foreach avec le tableau des artistes
-$bob = [
-    'name' => 'Marley',
-    'style' => 'reggae',
-    'alive' => false,
+$bet = 100;
+$gamblers = [
+    'Jean' => 0,
+    'Pierre' => 0,
+    'Paul' => 0,
 ];
 
-$david = [
-    'name' => 'Bowie',
-    'style' => 'pop',
-    'alive' => false,
+function generateDices($gamblers)
+{
+    foreach ($gamblers as $name => $gambler) {
+        $gamblers[$name] = rand(1,6);
+    }
+
+    return $gamblers;
+}
+
+function whoIsTheWinner($gamblers)
+{
+    $values = generateDices($gamblers);
+    asort($values);
+
+    return key($values);
+}
+
+$firstname = 'Bob';
+$lastname = 'Marley';
+
+function fullname(string $firstname, string $lastname): string
+{
+    return $firstname. ' '.$lastname;
+}
+
+$i=0;
+function doNothingUntilWins(?int $i)
+{
+    $rand = rand(0, 10);
+    if ($rand === 10) {
+        echo "WINS in $i times";
+    } else {
+        $i++;
+        doNothingUntilWins($i);
+    }
+}
+
+$products = [
+    'lait' => 5,
+    'viande' => 25,
+    'légumes' => 7,
+    'jeu' => 17
 ];
 
-$elton = [
-    'name' => 'John',
-    'style' => 'pop',
-    'alive' => true,
-];
+function calculTotal(array $products, float $tax)
+{
+    $total = 0;
+    $calculate = function ($totalPerProduct) use (&$total, $tax) {
+        $price = $totalPerProduct*$tax + $totalPerProduct;
+        $total = $total + $price;
 
-$artists = [$bob, $david, $elton];
+    };
+    array_walk($products, $calculate);
+
+    return $total;
+}
 
 ?>
 
 <html lang="fr">
 <head>
-    <title>Les boucles</title>
+    <title>Les fonctions</title>
     <meta charset="UTF-8">
     <link href="bootstrap.min.css" rel="stylesheet">
 </head>
@@ -54,61 +88,30 @@ $artists = [$bob, $david, $elton];
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
-            <h1>Les boucles</h1>
+            <h1>Les fonctions</h1>
             <?php
-            for ($i = 0; $i <= 10; $i++) {
-                echo 'Mon compteur est à '.$i.'<br>';
-            }
-            ?>
-            <?php
-                for ($slice = 1; $slice <= $nbSlice; $slice++) {
-                    if ($slice === 1) {
-                        echo 'Je mange une part ! J\'ai mangé '.$slice.' part de tarte<br>';
-                    } else {
-                        echo 'Je mange une part ! J\'ai mangé '.$slice.' parts de tarte<br>';
-                    }
-                }
-            ?>
+              echo 'le gagnant est : '. whoIsTheWinner($gamblers);
+              echo '<br>';
+            echo '<br>';
+              $fullname = fullname($firstname, $lastname);
+              echo $fullname;
+            echo '<br>';
+            echo '<br>';
+            doNothingUntilWins($i);
+            echo '<br>';
+            echo '<br>';
 
-            <?php
-                while ($gasTankLevel < $gasTank) {
-                    $gasTankLevel++;
-                    $toFill = $gasTank-$gasTankLevel;
-                    echo 'J\'ajoute un 1L dans mon réservoir, il me reste '. $toFill .'L à remplir<br>';
-                }
-                echo "Mon réservoir est plein !";
+            $respect = function () use ($fullname) {
+                return 'M. '.$fullname;
+            };
+            echo $respect();
+            echo '<br>';
+            echo '<br>';
+            echo '<br>';
+            echo '<br>';
+           echo calculTotal($products, 0.2)
+
             ?>
-
-            <?php
-            while ($money > 0) {
-                echo 'J\'achète un produit, il me rester '. $money .'€ dans mon porte-monnaie<br>';
-                $money -= $productPrice;
-            }
-            do {
-                echo 'J\'achète un produit, il me rester '. $money .'€ dans mon porte-monnaie<br>';
-                $money -= $productPrice;
-            }
-            while ($money > 0)
-            ?>
-
-            <?php
-                foreach ($artists as $artist) {
-                    echo $artist['name'] . ' peut-il faire un concert de '.$artist['style']. ' ? ';
-                    echo $artist['alive'] ? 'OUI' : 'NON';
-                    echo '<br>';
-                }
-
-                echo '<table class="table table-responsive">';
-                foreach ($artists as $artist) {
-                    foreach ($artist as $key => $value) {
-                        if ($value) {
-                            echo '<tr><td>'.$key.'</td><td>'.$value.'</td></tr>';
-                        }
-                    }
-                }
-                echo '</table>';
-            ?>
-
         </div>
     </div>
 </div>
