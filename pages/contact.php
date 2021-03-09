@@ -9,14 +9,14 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/blocs/header.php';
         <div class="col-12">
             <h1>Nous contacter</h1>
             <p>Merci de remplir le formulaire ci-dessous</p>
-            <form method="post" action="/pages/contact-response.php">
+            <form method="post" action="/pages/contact-response.php" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="name">Votre nom</label>
                     <input type="text" class="form-control" name="name" id="name">
                 </div>
                 <div class="form-group">
                     <label for="type">Civilité</label>
-                    <select class="form-control" id="type">
+                    <select class="form-control" id="type" name="type">
                         <option>M.</option>
                         <option>Mme</option>
                         <option>Mlle</option>
@@ -24,35 +24,35 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/blocs/header.php';
                 </div>
                 <div class="form-group">
                     <label for="birthdate">Date de naissance</label>
-                    <input type="date" class="form-control-input" id="birthdate">
+                    <input type="date" class="form-control-input" id="birthdate" name="birthdate">
                 </div>
                 <div class="form-group">
                 Où habitez-vous ?
                     <div class="form-check">
-                        <input type="radio" class="form-check-input" name="country" id="fr">
+                        <input type="radio" class="form-check-input" name="country" id="fr" value="fr">
                         <label class="form-check-label" for="fr">Fr</label>
                     </div>
                     <div class="form-check">
-                        <input type="radio" class="form-check-input" name="country" id="ue">
+                        <input type="radio" class="form-check-input" name="country" id="ue" value="ue">
                         <label class="form-check-label" for="ue">UE</label>
                     </div>
                     <div class="form-check">
-                        <input type="radio" class="form-check-input" name="country" id="other">
+                        <input type="radio" class="form-check-input" name="country" id="other" value="other">
                         <label class="form-check-label" for="other">Other</label>
                     </div>
                 </div>
                 <div class="form-group">
                     Vos atouts ?
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="php" name="assets">
+                        <input type="checkbox" class="form-check-input" id="php" name="assets[]" value="php">
                         <label class="form-check-label" for="php">PHP</label>
                     </div>
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="js" name="assets">
+                        <input type="checkbox" class="form-check-input" id="js" name="assets[]" value="js">
                         <label class="form-check-label" for="js">JS</label>
                     </div>
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="html-css" name="assets">
+                        <input type="checkbox" class="form-check-input" id="html-css" name="assets[]" value="html-css">
                         <label class="form-check-label" for="html-css">HTML/CSS</label>
                     </div>
                 </div>
