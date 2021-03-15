@@ -14,6 +14,10 @@
         <li class="nav-item <?php echo isCurrentUrl("/pages/contact.php"); ?>">
             <a class="nav-link" href="/pages/contact.php">Contact</a>
         </li>
+
+        <li class="nav-item <?php echo isCurrentUrl("/pages/logout.php"); ?>">
+            <a class="nav-link" href="/pages/logout.php">Log Out</a>
+        </li>
     </ul>
     <form class="form-inline my-2 my-lg-0" method="get" action="/pages/results.php">
         <input name="items" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
