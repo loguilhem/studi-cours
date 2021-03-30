@@ -1,45 +1,106 @@
 <?php
+
 error_reporting(E_ALL);
 ini_set('display_errors', 'on');
 
-/*
- * 1 - Céer un cooki et regarder dans le navigateur sans expiration
- * 2 - Cookie avec date d'expiration : attention à utiliser time () + x
- * 3 - Supprimer le cookie existant
- * 4 - Créer une condition sur un cookie existe
- * 5 - création de notre session
- *  - redirection vers login si pas de $_SESSION ['id']
- */
-//setcookie('myCookie', 'i like cookies', time() + 20);
-//setcookie('myCookie', 'i like cookies', time() - 60);
+include_once $_SERVER['DOCUMENT_ROOT'] . '/blocs/header.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/blocs/data.php';
 
+if (!file_exists("files/eleves.txt")) {
+    $fileStudents = fopen("files/eleves.txt", "w");
 
-if (!isset($_COOKIE['visitor'])) {
-    $newVisitor = true;
-    setcookie('visitor', 'visitor', time() + 10);
+    foreach ($students as $student) {
+        fwrite($fileStudents, 'Prénom : ' . $student[0] . ' | Nom : ' . $student[1] . " \n");
+    }
+
+    fclose($fileStudents);
 } else {
-    $newVisitor = false;
-    setcookie('visitor', 'visitor', time() - 10);
+    $fileStudents = fopen("files/eleves.txt", "r");
+    $data = [];
+
+    while ($line = fgets($fileStudents)) {
+        $data[] = $line;
+        $bobIsInList = false;
+        if ('Prénom : Bob | Nom : Marley ' === $line) {
+            $bobIsInList = true;
+        }
+    }
+    fclose($fileStudents);
+
+    if (!$bobIsInList) {
+        $fileStudents2 = file_get_contents("files/eleves.txt");
+        $fileStudents2 .= 'Prénom : Bob | Nom : Marley ';
+        file_put_contents("files/eleves.txt", $fileStudents2);
+    }
+}
+
+if (!file_exists("files/notes.csv")) {
+    $filesNotes = fopen("files/notes.csv", "w");
+
+    fputcsv($filesNotes, ['Prénom', 'Français', 'Anglais', 'Informatique'], ",");
+    foreach ($notes as $note) {
+        fputcsv($filesNotes, $note, ",");
+    }
+
+    fclose($filesNotes);
+} else {
+    $filesNotes =  $filesNotes = fopen("files/notes.csv", "r");
+    $dataNotes = [];
+    $row = 0;
+    while (($line = fgetcsv($filesNotes)) !== FALSE) {
+        $row++;
+        for ($c = 0 ; $c < count($line) ; $c++) {
+            $dataNotes[$row][] = $line[$c];
+        }
+        echo '<br>';
+    }
+    fclose($filesNotes);
 }
 
 
 
-include_once $_SERVER['DOCUMENT_ROOT'] . '/blocs/header.php';
 ?>
-
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-12">
-            <h1>Cookies et Sessions</h1>
-<!--            --><?php
-//                if ($newVisitor) {
-//                    echo 'Welcome, we hope to see you often :)';
-//                } else {
-//                    echo 'Welcome Back, glad to see you again :)';
-//                }
-//            ?>
+        <div class="col">
+            <a href="files/eleves.txt" target="_blank" class="btn btn-outline-primary">Télécharger la liste des élèves</a>
+            <a href="files/notes.csv" target="_blank" class="btn btn-outline-primary">Télécharger les notes</a>
 
+            <?php
+
+//            foreach ($data as $student) {
+//                echo '<div class="alert alert-primary">'.$student.'</div>';
+//                echo '<br>';
+//            }
+
+
+
+            ?>
+            <table class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <?php
+                     foreach ($dataNotes[1] as $title) {
+                         echo '<th>' . $title . '</th>';
+                     }
+                    ?>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                foreach ($dataNotes as $key => $notes) {
+                    if (1 !== $key) {
+                        echo '<tr>';
+                        foreach ($notes as $note) {
+                            echo '<td>' . $note . '</td>';
+                        }
+                        echo '</tr>';
+                    }
+                }
+                ?>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
