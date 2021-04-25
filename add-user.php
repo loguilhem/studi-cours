@@ -1,5 +1,9 @@
 <?php
-    include_once 'header.php';
+
+use injection\FlashBag;
+use injection\User;
+
+include_once 'header.php';
 
     $bag = new FlashBag();
 

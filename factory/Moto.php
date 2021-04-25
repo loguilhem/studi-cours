@@ -1,5 +1,7 @@
 <?php
 
+namespace factory;
+
 
 class Moto extends Transport
 {

@@ -1,5 +1,8 @@
 <?php
 
+namespace injection;
+
+use FlashBagInterface;
 
 class FlashBag implements FlashBagInterface
 {

@@ -1,5 +1,6 @@
 <?php
 
+namespace factory;
 
 abstract class Transport
 {

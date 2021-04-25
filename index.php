@@ -1,12 +1,23 @@
 <?php
-ini_set('display_errors', 1);
+
+use factory\TransportFactory;
+use injection\FlashBag;
+use singleton\Flash;
+
+ini_set('display_errors', 'on');
 
 include_once 'header.php';
 
+/**
+ * 1 - Singleton : utiliser l'ajout de l'utilisateur
+ * 2 - Dependency injection : meme chose avec l'injection de dépendance
+ */
 
 ?>
 
     <h1>Les design patterns</h1>
+
+    <a class="btn btn-primary" href="add-user.php">Ajouter un User</a>
 
     <?php
         /* Singleton

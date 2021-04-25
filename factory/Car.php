@@ -1,5 +1,6 @@
 <?php
 
+namespace factory;
 
 class Car extends Transport
 {
