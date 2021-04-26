@@ -8,6 +8,24 @@ class User
 {
     private $flashBag;
 
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param mixed $name
+     */
+    public function setName($name): void
+    {
+        $this->name = $name;
+    }
+
+    private $name;
+
     public function __construct(FlashBagInterface $flashBag)
     {
         $this->flashBag = $flashBag;

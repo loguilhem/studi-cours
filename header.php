@@ -9,6 +9,9 @@ require_once ('factory/Transport.php');
 require_once ('factory/Moto.php');
 require_once ('factory/Car.php');
 require_once ('factory/TransportFactory.php');
+require_once ('observer/AbonnementAlert.php');
+require_once ('observer/AbonnementThanks.php');
+require_once ('observer/Client.php');
 
 ?>
 
