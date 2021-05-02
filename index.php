@@ -1,12 +1,27 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-include_once 'Vue/header.php';
+require 'Autoloader.php';
+Autoloader::register();
 
-?>
-    <h1>Le modèle MVC</h1>
+use Controller\Controller;
 
-    <a class="btn btn-primary" href="Vue/car/car-list.php">Louer une voiture</a>
+$controller = new Controller();
 
-<?php
-    include_once "Vue/footer.php";
-?>
+if (isset($_GET['action'])) {
+    switch ($_GET['action']) {
+        case 'list':
+            $controller->listCars();
+            break;
+        case 'car':
+            $controller->getCar($_GET['car']);
+            break;
+        default:
+            $controller->notFound();
+            break;
+    }
+} else {
+    $controller->home();
+}

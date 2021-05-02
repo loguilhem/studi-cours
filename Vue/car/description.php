@@ -1,10 +1,3 @@
-<?php
-    include_once '../header.php';
-
-    $controller = new CarController();
-
-    $car = $controller->getCar($_GET['car']);
-?>
 
 <div class="row justify-content-center">
     <div class="card" style="width: 18rem;">

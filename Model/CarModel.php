@@ -1,7 +1,8 @@
 <?php
 
+namespace Model;
 
-class Car
+class CarModel
 {
     private int $id;
     private string $brand;

@@ -1,10 +1,14 @@
 <?php
 
-class CarController
+namespace Repository;
+
+use Model\CarModel;
+
+class CarRepository
 {
     private function provideData()
     {
-        yield (new Car())
+        yield (new CarModel())
             ->setId(1)
             ->setBrand('Peugeot')
             ->setPlace(4)
@@ -12,7 +16,7 @@ class CarController
             ->setStock(3)
         ;
 
-        yield (new Car())
+        yield (new CarModel())
             ->setId(2)
             ->setBrand('Renault')
             ->setPlace(6)
@@ -20,7 +24,7 @@ class CarController
             ->setStock(1)
         ;
 
-        yield (new Car())
+        yield (new CarModel())
             ->setId(3)
             ->setBrand('Mercedes')
             ->setPlace(4)
@@ -35,7 +39,7 @@ class CarController
         return $this->provideData();
     }
 
-    public function getCar(int $id): Car
+    public function getCar(int $id): CarModel
     {
         foreach ($this->provideData() as $car) {
             if ($car->getId() === $id) {

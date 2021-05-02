@@ -1,11 +1,7 @@
 <?php
     ini_set('display_errors', 1);
-
-require_once '/var/www/html/studi/Model/Car.php';
-require_once '/var/www/html/studi/Model/Customer.php';
-require_once '/var/www/html/studi/Model/Command.php';
-require_once '/var/www/html/studi/Controller/CarController.php';
-require_once '/var/www/html/studi/Controller/CommandController.php';
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
 ?>
 <!doctype html>
 <html lang="en">
@@ -24,10 +20,10 @@ require_once '/var/www/html/studi/Controller/CommandController.php';
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/index.php">Home</a>
+                        <a class="nav-link" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/Vue/car/car-list.php">Voitures</a>
+                        <a class="nav-link" href="?action=list">Voitures</a>
                     </li>
                 </ul>
             </div>
